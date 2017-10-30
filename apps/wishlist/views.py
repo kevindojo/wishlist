@@ -71,16 +71,24 @@ def logout(request):
 
 
 def home(request):
+    user_products = Product.objects.filter(friend=request.session['user_id'])
+    user_delete = Product.objects.filter(my_wish_id = request.session['user_id'])
 
     context = {
         'user': User.objects.get(id = request.session['user_id']),
-        'user_products': Product.objects.filter(friend=request.session['user_id']),
+        'user_products': user_products,
         'friend_products': Product.objects.exclude(friend=request.session['user_id']),
-        'user_delete': Product.objects.filter(my_wish_id = request.session['user_id']),
+        'user_delete': user_delete,
     }
     return render(request, 'wishlist/home.html', context)
 
 
+def delete(request, product_id):
+    Product.objects.filter(my_wish_id = request.session['user_id'], id = product_id).delete()
+    # my_wish = request.session = ['user_id'].delete()
+    # items = Products.objects.get(id = id)
+    # items.delete()
+    return redirect('/home')
 
 
 def add_item(request):
@@ -130,11 +138,3 @@ def remove_list(request,id):
 
     
 
-def delete(request, product_id):
-    Product.objects.filter(my_wish_id = request.session['user_id'], id = product_id).delete()
-    # my_wish = request.session = ['user_id'].delete()
-
-    # items = Products.objects.get(id = id)
-
-    # items.delete()
-    return redirect('/home')

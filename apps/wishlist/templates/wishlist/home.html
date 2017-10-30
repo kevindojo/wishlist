@@ -39,20 +39,19 @@
                         <td>
 
 
-
+                            
                             {% for value in user_delete %}
+                                {% if key.id is value.id%}
 
-                                {% if key.my_wish.id is value.my_wish.id %}
-                                    <a href = '/delete/{{value.id}}'>Delete</a>
-                                {% else %}
-                                    <a href='/remove_list/{{key.id}}'>Remove from my Wishlist!</a>
+                                    {% if key.my_wish.id is value.my_wish.id %}
+                                        <a href = '/delete/{{value.id}}'>Delete</a>
+                                    {% endif %}
                                 {% endif %}
 
                             {%endfor%}
-
-
-
+                            <a href='/remove_list/{{key.id}}'>Remove from my Wishlist!</a>
                         </td>
+
                     </tr>
                     {%endfor%}
 
