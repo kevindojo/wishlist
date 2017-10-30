@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Create Item</title>
+    </head>
+    <body>
+        <div id='wrapper'>
+            <div class ='navbar'>
+                <a href="/home">Home</a>
+                <a href="/logout" type = 'button'>Logout</a>
+            </div>
+
+
+            <h1>Create New Item</h1>
+
+            <div class = 'main'>
+                <form action = '/create_item' method = 'post'>
+                    {% csrf_token %}
+                    
+                    <p>Item/Product:</p>
+
+                    <input type = 'text' name ='item_name'>
+
+                    <p><input type = 'submit' value ='Add'></p>
+                
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </body>
+</html>

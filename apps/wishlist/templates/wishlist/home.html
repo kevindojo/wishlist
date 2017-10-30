@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'wishlist/css/style.css' %}">
+
+        <title>My Wish List</title>
+    </head>
+    <body>
+        <div id = 'wrapper'>
+
+            <div class = 'navbar'>
+                <a href="/logout" type = 'button'>Logout</a>
+            </div>
+
+
+            <h2>Hello, {{user.username}}!</h2>
+
+            <div class = 'your_wish'>
+                <h3>Your Wish List:</h3>
+                <table>
+                    <tr>
+                        <th>Item</th> 
+                        <th>Added By</th>
+                        <th>Date Added</th>
+                        <th>Action</th>
+                    </tr>
+
+                    {% for key in user_products %}
+                    <tr>
+                        <td><a href='/detail/{{key.id}}'>{{key.item_name}}</a></td>
+                        <td>{{key.my_wish.username}}</td>
+                        <td>{{key.created_at}}</td>
+
+                        <td>
+
+
+
+                            {% for value in user_delete %}
+
+                                {% if key.my_wish.id is value.my_wish.id %}
+                                    <a href = '/delete/{{value.id}}'>Delete</a>
+                                {% else %}
+                                    <a href='/remove_list/{{key.id}}'>Remove from my Wishlist!</a>
+                                {% endif %}
+
+                            {%endfor%}
+
+
+
+                        </td>
+                    </tr>
+                    {%endfor%}
+
+                </table>
+            </div>
+
+
+            <div class ='other_trip'>
+                <h3>Other User's Wish List: </h3>
+
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Added by</th> 
+                        <th>Date Added</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                    {% for key in friend_products %}
+                    <tr>
+                        <td><a href = '/detail/{{key.id}}'>{{key.item_name}}</a></td>
+                        <td>{{key.my_wish.username}}</a></th>
+                        <td>{{key.created_at}}</th>
+                        <td><a href='/add_list/{{key.id}}'>Add to my Wishlistz</a></td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+
+
+            </div>
+
+            <p><a href='/add_item'>Add an Item</a></p>
+            
+
+
+
+
+
+
+
+
+
+        </div>
+    </body>
+</html>
